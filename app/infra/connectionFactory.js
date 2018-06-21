@@ -5,7 +5,7 @@ var connectMySQL = function() {
         host : "localhost",
         user : "root",
         password : "",
-        database : "casadocodigo_nodejs"
+        database : "casadocodigo"
     });
 }
 
