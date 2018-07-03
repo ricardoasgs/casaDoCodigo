@@ -8,11 +8,11 @@ module.exports = function (app) {
         produtosDAO.listar(function (err, result) {
             if (!err) {
                 res.format({
-                    html: function(){
-                        console.log('entrou aqui'); 
+                    html: function () {
+                        console.log('entrou aqui');
                         res.render("produtos/lista", { lista: result });
                     },
-                    json: function(){
+                    json: function () {
                         res.json(result);
                     }
                 })
@@ -27,12 +27,28 @@ module.exports = function (app) {
 
 
     app.get('/produtos/form', function (req, res) {
-        res.render('produtos/form');
+        res.render('produtos/form', {errosValidacao: {}, produto: {}});
     })
 
     app.post('/produtos', function (req, res) {
 
         var produto = req.body;
+
+        req.assert('titulo', 'Titulo é obrigatorio!').notEmpty();
+        req.assert('preco', 'Formato invalido!').isFloat();
+        var erros = req.validationErrors();
+
+        if (erros) {
+            res.format({
+                html: function () {
+                    res.status(400).render('produtos/form', {errosValidacao: erros, produto: produto});
+                },
+                json: function () {
+                    res.statatus(400).json(erros);
+                }
+            });
+            return;
+        }
 
         var connection = app.infra.connectionFactory();
         var produtosDAO = new app.infra.ProdutosDAO(connection);
