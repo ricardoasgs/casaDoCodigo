@@ -9,7 +9,6 @@ module.exports = function (app) {
             if (!err) {
                 res.format({
                     html: function () {
-                        console.log('entrou aqui');
                         res.render("produtos/lista", { lista: result });
                     },
                     json: function () {
