@@ -6,7 +6,6 @@ var http = require("http");
 var io = require("socket.io");
 var errors = require("../middlewares/errors");
 
-
 module.exports = function () {
     var app = express();
 
@@ -24,13 +23,23 @@ module.exports = function () {
     app.use(bodyParser.json());
     app.use(expressValidator());
 
-    load("routes", { cwd: "app" })
-        .then("infra")
+    load("routes", {cwd: "app"})
+        .then("config/connectionFactory.js")
+        .then("DAO")
         .into(app);
 
-    app.use(errors.error404());
+    app.use(function (req, res, next) {
+        res.status(404).render('erros/404');
+        next();
+    });
 
-    app.use(errors.error500());
+    app.use(function (err, req, res, next) {
+        if (process.env.NODE_ENV == "production") {
+            res.status(500).render('erros/500');
+            return;
+        }
+        next(err);
+    });
 
     http.listen(process.env.PORT, function () {
         console.log("servidor rodando");

@@ -1,3 +1,3 @@
-var app = require("./config/express")();
+var app = require("./app/config/express")();
 
 
