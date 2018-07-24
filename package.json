@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "Projeto casa do codigo",
   "main": "app.js",
+  "engines":{
+    "node": "6.12"
+  },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node app"
   },
   "author": "Ricardo Garcia",
   "license": "ISC",

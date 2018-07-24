@@ -178,7 +178,7 @@ Usar width % + padding % de acordo com essas quantidades:
         width:100%;
     }
     #newsletter-footer p.newsletter-call {
-        margin-bottom:20px;
+        margin-bottom:10px;
     }
 
     #home-highlight-collection li{
@@ -326,7 +326,7 @@ Usar width % + padding % de acordo com essas quantidades:
         margin: 0;
         clear:left;
         width:75%;
-        padding:0 14%; 
+        padding:0 10%; 
     }
 }
 

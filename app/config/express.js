@@ -23,7 +23,7 @@ module.exports = function () {
     app.use(bodyParser.json());
     app.use(expressValidator());
 
-    load("routes", {cwd: "app"})
+    load("routes", { cwd: "app" })
         .then("config/connectionFactory.js")
         .then("DAO")
         .into(app);
@@ -41,7 +41,9 @@ module.exports = function () {
         next(err);
     });
 
-    http.listen(process.env.PORT, function () {
+    var PORT = process.env.PORT || 3000;
+
+    http.listen(PORT, function () {
         console.log("servidor rodando");
     });
 
