@@ -28,6 +28,10 @@ small {
   display: block;
 }
 
+.noresize{
+  resize: none;
+}
+
 .clearfix:before,
 .clearfix:after {
   content: "";
